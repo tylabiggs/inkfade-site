@@ -48,13 +48,15 @@
       font-weight: 600;
       margin: 0;
       line-height: 1.2;
-      transform: translateY(50px);
       opacity: 0;
-      transition: all 0.8s ease-out;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease-out forwards;
     }
-    .hero h1.show {
-      transform: translateY(0);
-      opacity: 1;
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .hero span {
       color: #d4af37;
@@ -154,46 +156,46 @@
       top: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
+      overflow: hidden;
       background-color: rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.3s ease-out;
     }
     .modal-content {
       background: #e6e3d9;
       margin: 10% auto;
-      padding: 50px;
+      padding: 40px;
       border-radius: 30px;
-      width: 90%;
-      max-width: 420px;
+      width: 400px;
       box-sizing: border-box;
       color: #111;
       text-align: center;
       box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.3s ease;
     }
-    .modal.show .modal-content {
-      opacity: 1;
-      transform: scale(1);
+    .modal-content h2 {
+      margin-top: 0;
+      font-size: 20px;
     }
-    input {
+    .modal-content p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .modal-content input {
       width: 100%;
-      padding: 14px;
-      margin: 12px 0;
+      padding: 12px;
+      margin: 10px 0;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+      border: none;
+      font-size: 14px;
     }
-    .btn-group {
+    .modal-content .btn-group {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      margin-top: 20px;
     }
     .btn-cancel {
       background-color: #111;
       color: white;
-      padding: 12px;
+      padding: 10px 16px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -202,7 +204,7 @@
     .btn-submit {
       background-color: #f9d465;
       color: #111;
-      padding: 12px;
+      padding: 10px 16px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -223,8 +225,73 @@
     footer a:hover {
       color: #fff;
     }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
+</head>
+<body>
+  <header>
+    <div><strong>InkFade</strong></div>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Why It Matters</a>
+      <a href="#">Roadmap</a>
+      <a class="button" href="#" onclick="openModal()">Investor Info</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h1 class="show">Tattoos are permanent... <span>Not Anymore</span></h1>
+    <p>InkFade is revolutionizing self-expression with category-defining innovation — tattoos that fade, creativity that lasts.</p>
+  </section>
+  <section class="section">
+    <h2>Our Development Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-step left"><div class="timeline-content"><h3>1. Concept & Research</h3><p>Validating market opportunity and initial product concept research.</p></div></div>
+      <div class="timeline-step right"><div class="timeline-content"><h3>2. Formula Development</h3><p>Working with leading chemists to develop our proprietary ink formula.</p></div></div>
+      <div class="timeline-step left"><div class="timeline-content"><h3>3. Testing & Studio Trials</h3><p>Safety testing and small-scale trials with select tattoo artists.</p></div></div>
+      <div class="timeline-step right"><div class="timeline-content"><h3>4. Soft Launch</h3><p>Limited release to partner studios and gathering customer feedback.</p></div></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="invest">
+      <img src="inkfade-bottle.png" alt="InkFade Bottle">
+      <div>
+        <h2>Invest in <span>InkFade</span></h2>
+        <p>We’re redefining an industry with a product no one's dared to create — and it's just the beginning. We’re open to both early strategic investors and visionary VCs.</p>
+        <a class="button" href="#" onclick="openModal()">Request Our Investor Deck</a>
+      </div>
+    </div>
+  </section>
+  <div class="modal" id="investorModal">
+    <div class="modal-content">
+      <h2>Request Investor Deck</h2>
+      <p>Fill in your details and we'll share exclusive access to our investor deck.</p>
+      <input type="text" placeholder="Full Name" />
+      <input type="email" placeholder="Email Address" />
+      <input type="tel" placeholder="Phone Number" />
+      <div class="btn-group">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-submit">Submit Request</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p><strong>InkFade</strong> — The Future of Tattoos</p>
+    <p><a href="#">About</a><a href="#">Why It Matters</a><a href="#">Roadmap</a><a href="#">Investor Info</a></p>
+    <p>© 2025 InkFade. All rights reserved.</p>
+  </footer>
   <script>
+    const modal = document.getElementById('investorModal');
+    function openModal() {
+      document.body.classList.add('modal-open');
+      modal.style.display = 'block';
+    }
+    function closeModal() {
+      document.body.classList.remove('modal-open');
+      modal.style.display = 'none';
+    }
     document.addEventListener('DOMContentLoaded', () => {
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -239,8 +306,5 @@
       });
     });
   </script>
-</head>
-<body>
-  <!-- Your content goes here -->
 </body>
 </html>
