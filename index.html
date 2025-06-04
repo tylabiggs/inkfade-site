@@ -48,6 +48,13 @@
       font-weight: 600;
       margin: 0;
       line-height: 1.2;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.8s ease-out;
+    }
+    .hero h1.show {
+      transform: translateY(0);
+      opacity: 1;
     }
     .hero span {
       color: #d4af37;
@@ -80,6 +87,13 @@
       position: relative;
       background-color: inherit;
       width: 50%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    .timeline-step.show {
+      opacity: 1;
+      transform: translateY(0);
     }
     .timeline-step::after {
       content: '';
@@ -154,6 +168,13 @@
       color: #111;
       text-align: center;
       box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.3s ease;
+    }
+    .modal.show .modal-content {
+      opacity: 1;
+      transform: scale(1);
     }
     input {
       width: 100%;
@@ -203,8 +224,23 @@
       color: #fff;
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.timeline-step, .hero h1').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
 </head>
 <body>
-  <!-- Content remains unchanged -->
+  <!-- Your content goes here -->
 </body>
 </html>
