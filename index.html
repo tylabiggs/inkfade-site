@@ -5,182 +5,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InkFade | The Future of Tattoos</title>
   <style>
-    html, body {
+    :root {
+      --black: #111;
+      --gold: #d4af37;
+      --cream: #e6e3d9;
+      --offwhite: #f9f9f9;
+    }
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #f9f9f9;
-      color: #111;
-      height: 100%;
+      box-sizing: border-box;
     }
-    body.modal-open {
-      overflow: hidden;
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: var(--offwhite);
+      color: var(--black);
+      line-height: 1.6;
     }
     header {
+      background-color: var(--black);
+      color: var(--offwhite);
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background-color: #fff;
-      border-bottom: 1px solid #eee;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      letter-spacing: 1px;
     }
     nav a {
-      margin: 0 10px;
+      color: var(--offwhite);
+      margin-left: 20px;
       text-decoration: none;
-      color: #111;
       font-weight: 500;
     }
     .hero {
-      padding: 80px 40px;
+      background-color: var(--black);
+      color: var(--offwhite);
       text-align: center;
+      padding: 120px 20px 80px;
     }
-    .hero h1 {
+    .hero h2 {
       font-size: 3rem;
       margin-bottom: 20px;
     }
-    .hero span {
-      color: #d4af37;
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--gold);
     }
-    .modal, .success-modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow-y: auto;
-      background-color: rgba(0, 0, 0, 0.6);
-      animation: fadeIn 0.3s ease-in-out;
+    .section {
+      padding: 80px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .modal-content, .success-content {
-      background: #e6e3d9;
-      margin: 10% auto;
-      padding: 40px;
-      border-radius: 30px;
-      width: 90%;
-      max-width: 420px;
-      box-sizing: border-box;
-      color: #111;
-      text-align: center;
-      box-shadow: 0 15px 48px rgba(0,0,0,0.2);
-      animation: fadeInContent 0.4s ease-in-out;
-    }
-    .success-content {
-      background: #f9f9f9;
-    }
-    @keyframes fadeInContent {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .success-content h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    .success-content p {
-      font-size: 14px;
+    .section h2 {
+      font-size: 2rem;
       margin-bottom: 20px;
+      text-align: center;
     }
-    .success-content button {
-      padding: 10px 20px;
-      background-color: #111;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+    .section p {
+      font-size: 1rem;
+      margin-bottom: 15px;
     }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
+    .timeline {
+      display: grid;
+      gap: 40px;
+      border-left: 4px solid var(--gold);
+      padding-left: 20px;
+      margin-top: 40px;
     }
-    .btn-group {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+    .timeline-step {
+      position: relative;
     }
-    .btn-cancel {
-      background-color: #111;
+    .timeline-step::before {
+      content: attr(data-step);
+      position: absolute;
+      left: -38px;
+      background: var(--black);
       color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      flex: 1;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      border: 2px solid var(--gold);
     }
-    .btn-submit {
-      background-color: #f9d465;
-      color: #111;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      flex: 1;
+    footer {
+      background-color: var(--black);
+      color: var(--offwhite);
+      text-align: center;
+      padding: 40px 20px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>InkFade</strong></div>
+    <h1>InkFade</h1>
     <nav>
-      <a href="#">About</a>
-      <a href="#">Why It Matters</a>
-      <a href="#">Roadmap</a>
-      <a class="btn-submit" href="#" onclick="openModal()">Investor Info</a>
+      <a href="#about">About</a>
+      <a href="#why">Why It Matters</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#invest">Invest</a>
     </nav>
   </header>
 
   <section class="hero">
-    <h1>Disrupting the <span>Future of Ink</span></h1>
-    <p>InkFade is revolutionizing self-expression with category-defining innovation — tattoos that fade, creativity that lasts.</p>
+    <h2>Tattoos are permanent... <em>Not Anymore</em></h2>
+    <p>Disruptive. Sleek. Fcking unforgettable.</p>
   </section>
 
-  <div class="modal" id="investorModal">
-    <div class="modal-content">
-      <h2>Request Investor Deck</h2>
-      <p>Fill in your details and we'll share exclusive access to our investor deck.</p>
-      <input type="text" placeholder="Full Name" />
-      <input type="email" placeholder="Email Address" />
-      <input type="tel" placeholder="Phone Number" />
-      <div class="btn-group">
-        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn-submit" onclick="showSuccess()">Submit Request</button>
+  <section class="section" id="about">
+    <h2>Where It All Began</h2>
+    <p>InkFade was born from a single, burning question: What if tattoos could evolve with you?</p>
+    <p>Founded by Tyla Biggs—entrepreneur, creative force, and no stranger to reinvention—InkFade came to life in the middle of personal transformation. What started as an obsession with expression and commitment-free design turned into a category-shattering concept: semi-permanent tattoos that fade on demand, without the regret or the removal lasers.</p>
+    <p>Fueled by frustration with traditional tattoo permanence, and inspired by the idea that identity isn’t fixed, Tyla assembled a vision that now challenges the industry to rethink everything it thought it knew about ink.</p>
+  </section>
+
+  <section class="section" id="why">
+    <h2>Why It Matters</h2>
+    <p>Every year, millions spend billions trying to erase tattoos they once loved. The regret industry is booming—while tattoo innovation has stayed stagnant.</p>
+    <p>Until now.</p>
+    <p>InkFade introduces a revolutionary ink technology designed to last 6–12+ months and fade when you're ready. No more compromises between self-expression and lifelong commitment. Our system blends real tattooing technique with fade-on-demand capability, merging the best of both permanence and freedom.</p>
+  </section>
+
+  <section class="section" id="timeline">
+    <h2>Development Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-step" data-step="1">
+        <h3>Concept & Research</h3>
+        <p>Validated market demand, studied dermatological limitations, and crafted an unserved niche.</p>
+      </div>
+      <div class="timeline-step" data-step="2">
+        <h3>Formula Development</h3>
+        <p>Partnered with chemists to create a proprietary ink that mimics tattoo ink but is molecularly designed to fade cleanly over time—or on command.</p>
+      </div>
+      <div class="timeline-step" data-step="3">
+        <h3>Testing & Studio Trials</h3>
+        <p>Studio collaborations to test application methods, fade timelines, and consumer perception.</p>
+      </div>
+      <div class="timeline-step" data-step="4">
+        <h3>Soft Launch</h3>
+        <p>Limited rollout with curated partner studios to gather real-world data, testimonials, and refinement feedback.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="success-modal" id="successModal">
-    <div class="success-content">
-      <h2>Success!</h2>
-      <p>Thank you for submitting your request, you should be receiving the deck shortly.</p>
-      <button onclick="closeSuccess()">Continue</button>
-    </div>
-  </div>
+  <section class="section" id="invest">
+    <h2>Investor & Partner Opportunity</h2>
+    <p>We’re not here to improve tattooing. We’re here to redefine it.</p>
+    <p>InkFade is opening the door to a brand-new category—one that merges the longevity of ink with the fluidity of lifestyle. From self-expression to brand collaborations, event-driven tattoos to temporary self-identity changes, this market is larger than anyone expects.</p>
+    <p>If you’ve ever wanted to be in before a category exploded, now’s your moment.</p>
+    <p><strong>Request our investor deck by reaching out to: <a href="mailto:hello@inkfade.co">hello@inkfade.co</a></strong></p>
+  </section>
 
-  <script>
-    function openModal() {
-      document.getElementById('investorModal').style.display = 'block';
-      document.body.classList.add('modal-open');
-    }
-    function closeModal() {
-      document.getElementById('investorModal').style.display = 'none';
-      document.body.classList.remove('modal-open');
-    }
-    function showSuccess() {
-      document.getElementById('investorModal').style.display = 'none';
-      document.getElementById('successModal').style.display = 'block';
-    }
-    function closeSuccess() {
-      document.getElementById('successModal').style.display = 'none';
-      document.body.classList.remove('modal-open');
-    }
-  </script>
+  <footer>
+    <p><strong>InkFade</strong> — Empowering expression without lifelong commitment</p>
+    <p>© 2025 InkFade. All rights reserved.</p>
+  </footer>
 </body>
 </html>
