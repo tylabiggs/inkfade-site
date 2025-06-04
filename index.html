@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InkFade | The Future of Tattoos</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #f9f9f9;
       color: #111;
+      height: 100%;
     }
     body.modal-open {
       overflow: hidden;
     }
-    .modal {
+    .modal, .success-modal {
       display: none;
       position: fixed;
       z-index: 1000;
@@ -22,7 +24,7 @@
       top: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;
       background-color: rgba(0, 0, 0, 0.6);
       animation: fadeIn 0.3s ease-in-out;
     }
@@ -30,45 +32,25 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    .modal-content {
+    .modal-content, .success-content {
       background: #e6e3d9;
-      margin: 30% auto;
-      padding: 40px 40px;
+      margin: 10% auto;
+      padding: 40px;
       border-radius: 30px;
-      width: 420px;
-      max-height: 90vh;
-      overflow-y: auto;
+      width: 90%;
+      max-width: 420px;
       box-sizing: border-box;
       color: #111;
       text-align: center;
       box-shadow: 0 15px 48px rgba(0,0,0,0.2);
       animation: fadeInContent 0.4s ease-in-out;
     }
+    .success-content {
+      background: #f9f9f9;
+    }
     @keyframes fadeInContent {
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
-    }
-    .success-modal {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.6);
-      animation: fadeIn 0.3s ease-in-out;
-    }
-    .success-content {
-      background: #f9f9f9;
-      color: #111;
-      margin: 25% auto;
-      padding: 40px 30px;
-      border-radius: 30px;
-      width: 360px;
-      text-align: center;
-      box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
-      animation: fadeInContent 0.4s ease-in-out;
     }
     .success-content h2 {
       font-size: 22px;
@@ -85,6 +67,37 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .btn-cancel {
+      background-color: #111;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      flex: 1;
+    }
+    .btn-submit {
+      background-color: #f9d465;
+      color: #111;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      flex: 1;
     }
   </style>
 </head>
