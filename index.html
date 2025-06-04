@@ -120,43 +120,53 @@
       background-color: rgba(0, 0, 0, 0.6);
     }
     .modal-content {
-      background-color: #3f3c36;
+      background: #e6e3d9;
       margin: 10% auto;
-      padding: 20px;
-      border-radius: 8px;
-      width: 300px;
-      color: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      width: 320px;
+      color: #111;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
     .modal-content h2 {
       margin-top: 0;
-      color: #f9d465;
+      font-size: 20px;
+    }
+    .modal-content p {
+      font-size: 14px;
+      margin-bottom: 20px;
     }
     .modal-content input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
-      border-radius: 4px;
+      border-radius: 8px;
       border: none;
+      font-size: 14px;
     }
     .modal-content .btn-group {
       display: flex;
       justify-content: space-between;
+      gap: 10px;
     }
     .modal-content .btn-cancel {
       background-color: #111;
       color: white;
-      padding: 10px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
+      flex: 1;
     }
     .modal-content .btn-submit {
       background-color: #f9d465;
       color: #111;
-      padding: 10px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
+      flex: 1;
     }
     footer {
       background-color: #111;
@@ -230,15 +240,16 @@
 
   <div class="modal" id="investorModal">
     <div class="modal-content">
-      <h2>Request Investor Deck</h2>
-      <p>Fill in your details and we'll send you our investor deck.</p>
+      <h2>Subscribe</h2>
+      <p>Early access to our investor deck. Direct to your inbox with updates and exclusive insight.</p>
       <input type="text" placeholder="Full Name" />
       <input type="email" placeholder="Email Address" />
       <input type="tel" placeholder="Phone Number" />
       <div class="btn-group">
         <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn-submit">Submit Request</button>
+        <button class="btn-submit">Subscribe</button>
       </div>
+      <p style="font-size: 11px; margin-top: 12px;">You can unsubscribe at any time. <a href="#" style="color: #555; text-decoration: underline;">Privacy policy</a></p>
     </div>
   </div>
 
