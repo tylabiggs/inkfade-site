@@ -16,6 +16,31 @@
     body.modal-open {
       overflow: hidden;
     }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .hero {
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .hero span {
+      color: #d4af37;
+    }
     .modal, .success-modal {
       display: none;
       position: fixed;
@@ -102,6 +127,21 @@
   </style>
 </head>
 <body>
+  <header>
+    <div><strong>InkFade</strong></div>
+    <nav>
+      <a href="#">About</a>
+      <a href="#">Why It Matters</a>
+      <a href="#">Roadmap</a>
+      <a class="btn-submit" href="#" onclick="openModal()">Investor Info</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Disrupting the <span>Future of Ink</span></h1>
+    <p>InkFade is revolutionizing self-expression with category-defining innovation — tattoos that fade, creativity that lasts.</p>
+  </section>
+
   <div class="modal" id="investorModal">
     <div class="modal-content">
       <h2>Request Investor Deck</h2>
