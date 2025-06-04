@@ -11,102 +11,8 @@
       background-color: #f9f9f9;
       color: #111;
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background-color: #fff;
-      border-bottom: 1px solid #eee;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-    }
-    .hero {
-      padding: 80px 40px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    .hero span {
-      color: #d4af37;
-    }
-    .section {
-      padding: 60px 40px;
-    }
-    .timeline {
-      position: relative;
-      max-width: 800px;
-      margin: auto;
-    }
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      background-color: #ccc;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -3px;
-    }
-    .timeline-step {
-      padding: 20px 40px;
-      position: relative;
-      background-color: inherit;
-      width: 50%;
-    }
-    .timeline-step::after {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      right: -17px;
-      background-color: #111;
-      border: 4px solid #d4af37;
-      top: 15px;
-      border-radius: 50%;
-      z-index: 1;
-    }
-    .left {
-      left: 0;
-    }
-    .right {
-      left: 50%;
-    }
-    .right::after {
-      left: -16px;
-    }
-    .timeline-content {
-      padding: 20px;
-      background-color: #fff;
-      position: relative;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .timeline h3 {
-      margin-top: 0;
-    }
-    .invest {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .invest img {
-      max-width: 200px;
-    }
-    .button {
-      background-color: #111;
-      color: #fff;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+    body.modal-open {
+      overflow: hidden;
     }
     .modal {
       display: none;
@@ -114,131 +20,75 @@
       z-index: 1000;
       left: 0;
       top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
       background-color: rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.3s ease-in-out;
     }
-.modal-content {
-  background: #e6e3d9;
-  margin: 30% auto;
-  padding: 40px 40px;
-  border-radius: 30px;
-  width: 420px;
-  box-sizing: border-box;
-  color: #111;
-  text-align: center;
-  box-shadow: 0 15px 48px rgba(0,0,0,0.2);
-}
-    .modal-content h2 {
-      margin-top: 0;
-      font-size: 20px;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .modal-content p {
+    .modal-content {
+      background: #e6e3d9;
+      margin: 30% auto;
+      padding: 40px 40px;
+      border-radius: 30px;
+      width: 420px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+      color: #111;
+      text-align: center;
+      box-shadow: 0 15px 48px rgba(0,0,0,0.2);
+      animation: fadeInContent 0.4s ease-in-out;
+    }
+    @keyframes fadeInContent {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .success-modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .success-content {
+      background: #f9f9f9;
+      color: #111;
+      margin: 25% auto;
+      padding: 40px 30px;
+      border-radius: 30px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
+      animation: fadeInContent 0.4s ease-in-out;
+    }
+    .success-content h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .success-content p {
       font-size: 14px;
       margin-bottom: 20px;
     }
-    .modal-content input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 14px;
-    }
-    .modal-content .btn-group {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .modal-content .btn-cancel {
-      background-color: #111;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      flex: 1;
-    }
-    .modal-content .btn-submit {
-      background-color: #f9d465;
-      color: #111;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      flex: 1;
-    }
-    footer {
+    .success-content button {
+      padding: 10px 20px;
       background-color: #111;
       color: #fff;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    footer a {
-      color: #ccc;
-      margin: 0 10px;
-      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div><strong>InkFade</strong></div>
-    <nav>
-      <a href="#">About</a>
-      <a href="#">Why It Matters</a>
-      <a href="#">Roadmap</a>
-      <a class="button" href="#" onclick="openModal()">Investor Info</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h1>Disrupting the <span>Future of Ink</span></h1>
-    <p>InkFade is revolutionizing self-expression with category-defining innovation — tattoos that fade, creativity that lasts.</p>
-  </section>
-
-  <section class="section">
-    <h2 style="text-align:center">Our Development Timeline</h2>
-    <div class="timeline">
-      <div class="timeline-step left">
-        <div class="timeline-content">
-          <h3>1. Concept & Research</h3>
-          <p>Validating market opportunity and initial product concept research.</p>
-        </div>
-      </div>
-      <div class="timeline-step right">
-        <div class="timeline-content">
-          <h3>2. Formula Development</h3>
-          <p>Working with leading chemists to develop our proprietary ink formula.</p>
-        </div>
-      </div>
-      <div class="timeline-step left">
-        <div class="timeline-content">
-          <h3>3. Testing & Studio Trials</h3>
-          <p>Safety testing and small-scale trials with select tattoo artists.</p>
-        </div>
-      </div>
-      <div class="timeline-step right">
-        <div class="timeline-content">
-          <h3>4. Soft Launch</h3>
-          <p>Limited release to partner studios and gathering customer feedback.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="invest">
-      <img src="inkfade-bottle.png" alt="InkFade Bottle">
-      <div>
-        <h2>Invest in <span>InkFade</span></h2>
-        <p>We’re redefining an industry with a product no one's dared to create — and it's just the beginning. We’re open to both early strategic investors and visionary VCs.</p>
-        <a class="button" href="#" onclick="openModal()">Request Our Investor Deck</a>
-      </div>
-    </div>
-  </section>
-
   <div class="modal" id="investorModal">
     <div class="modal-content">
       <h2>Request Investor Deck</h2>
@@ -248,27 +98,35 @@
       <input type="tel" placeholder="Phone Number" />
       <div class="btn-group">
         <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn-submit">Submit Request</button>
-      </div>
+        <button class="btn-submit" onclick="showSuccess()">Submit Request</button>
       </div>
     </div>
-  <footer>
-    <p><strong>InkFade</strong> — The Future of Tattoos</p>
-    <p>
-      <a href="#">About</a>
-      <a href="#">Why It Matters</a>
-      <a href="#">Roadmap</a>
-      <a href="#">Investor Info</a>
-    </p>
-    <p>© 2025 InkFade. All rights reserved.</p>
-  </footer>
+  </div>
+
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <h2>Success!</h2>
+      <p>Thank you for submitting your request, you should be receiving the deck shortly.</p>
+      <button onclick="closeSuccess()">Continue</button>
+    </div>
+  </div>
 
   <script>
     function openModal() {
       document.getElementById('investorModal').style.display = 'block';
+      document.body.classList.add('modal-open');
     }
     function closeModal() {
       document.getElementById('investorModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
+    }
+    function showSuccess() {
+      document.getElementById('investorModal').style.display = 'none';
+      document.getElementById('successModal').style.display = 'block';
+    }
+    function closeSuccess() {
+      document.getElementById('successModal').style.display = 'none';
+      document.body.classList.remove('modal-open');
     }
   </script>
 </body>
