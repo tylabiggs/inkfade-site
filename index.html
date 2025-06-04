@@ -65,13 +65,6 @@
       position: relative;
       background-color: inherit;
       width: 50%;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
-    .timeline-step.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
     .timeline-step::after {
       content: '';
@@ -85,9 +78,15 @@
       border-radius: 50%;
       z-index: 1;
     }
-    .left { left: 0; }
-    .right { left: 50%; }
-    .right::after { left: -16px; }
+    .left {
+      left: 0;
+    }
+    .right {
+      left: 50%;
+    }
+    .right::after {
+      left: -16px;
+    }
     .timeline-content {
       padding: 20px;
       background-color: #fff;
@@ -276,14 +275,6 @@
       document.getElementById('investorModal').style.display = 'none';
       document.body.classList.remove('modal-open');
     }
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.timeline-step').forEach(step => {
-        const rect = step.getBoundingClientRect();
-        if (rect.top <= window.innerHeight - 100) {
-          step.classList.add('visible');
-        }
-      });
-    });
   </script>
 </body>
 </html>
