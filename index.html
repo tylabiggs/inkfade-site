@@ -4,358 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InkFade | The Future of Tattoos</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #f9f9f9;
-      color: #111;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-    body.modal-open {
-      overflow: hidden;
-    }
-    section {
-      padding: 80px 60px;
-    }
-    header {
-      background-color: #fff;
-      padding: 20px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    nav a {
-      margin: 0 20px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #d4af37;
-    }
-    .hero {
-      text-align: center;
-      padding: 140px 20px 100px;
-      background: linear-gradient(120deg, #ffffff, #f0f0f0);
-    }
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 600;
-      margin: 0;
-    }
-    .hero span {
-      color: #d4af37;
-    }
-    .about {
-      background-color: #111;
-      color: #fff;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .about img {
-      max-width: 300px;
-      border-radius: 20px;
-    }
-    .about-content {
-      max-width: 600px;
-    }
-    .about h2 {
-      color: #d4af37;
-      font-size: 2.2rem;
-    }
-    .timeline-section {
-      background-color: #fff;
-    }
-    h2.section-title {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .timeline {
-      position: relative;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 4px;
-      background: #ccc;
-      transform: translateX(-50%);
-    }
-    .timeline-step {
-      position: relative;
-      width: 100%;
-      padding: 40px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .circle {
-      background-color: #111;
-      color: #fff;
-      border: 4px solid #d4af37;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-    .line-text {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 20px;
-      width: 40%;
-      z-index: 1;
-    }
-    .left {
-      flex-direction: row-reverse;
-      justify-content: flex-start;
-    }
-    .right {
-      justify-content: flex-start;
-    }
-    .left .line-text {
-      text-align: left;
-      margin-left: 60px;
-    }
-    .right .line-text {
-      text-align: right;
-      margin-right: 60px;
-    }
-    .timeline-step::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40px;
-      height: 2px;
-      background-color: #ccc;
-      z-index: 0;
-    }
-    .left::after {
-      left: calc(50% + 25px);
-    }
-    .right::after {
-      right: calc(50% + 25px);
-    }
-    .invest {
-      background-color: #f7f5f0;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .invest img {
-      max-width: 250px;
-    }
-    .button {
-      background-color: #111;
-      color: #fff;
-      padding: 14px 28px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-    .modal-content {
-      background: #e6e3d9;
-      margin: 10% auto;
-      padding: 40px;
-      border-radius: 30px;
-      width: 400px;
-      color: #111;
-      text-align: center;
-      box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
-    }
-    .modal-content input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-    }
-    .modal-content .btn-group {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .btn-cancel, .btn-submit {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      flex: 1;
-      cursor: pointer;
-    }
-    .btn-cancel {
-      background-color: #111;
-      color: #fff;
-    }
-    .btn-submit {
-      background-color: #f9d465;
-      color: #111;
-    }
-    footer {
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-      padding: 50px 20px;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div><strong>InkFade</strong></div>
-    <nav>
-      <a href="#">About</a>
-      <a href="#">Why It Matters</a>
-      <a href="#">Roadmap</a>
-      <a class="button" href="#" onclick="openModal()">Investor Info</a>
-    </nav>
-  </header>
-  <section class="hero">
-    <h1>Tattoos are permanent... <span>Not Anymore</span></h1>
-    <p>InkFade is redefining expression with technology-driven ink innovation that fades on your terms.</p>
-  </section>
-  <section class="about">
-    <img src="https://via.placeholder.com/300x400" alt="Founder photo" />
-    <div class="about-content">
-      <h2>Meet the Founder</h2>
-      <p>Hi, I'm Tyla — a creator, builder, and visionary who’s always questioned the idea of permanence. InkFade was born out of a moment of transition and identity transformation. After going through personal reinvention, I realized how many people crave the freedom to express without permanence holding them back. So, I began building a new category: semi-permanent tattoos that fade only when you choose.</p>
-    </div>
-  </section>
-  <section class="timeline-section">
-    <h2 class="section-title">Our Development Timeline</h2>
-    <div class="timeline">
-      <div class="timeline-step left">
-        <div class="line-text">
-          <h3>Concept & Research</h3>
-          <p>Validating market opportunity and initial product concept research.</p>
-        </div>
-        <div class="circle">1</div>
-      </div>
-      <div class="timeline-step right">
-        <div class="line-text">
-          <h3>Formula Development</h3>
-          <p>Working with leading chemists to develop our proprietary ink formula.</p>
-        </div>
-        <div class="circle">2</div>
-      </div>
-      <div class="timeline-step left">
-        <div class="line-text">
-          <h3>Testing & Studio Trials</h3>
-          <p>Safety testing and small-scale trials with select tattoo artists.</p>
-        </div>
-        <div class="circle">3</div>
-      </div>
-      <div class="timeline-step right">
-        <div class="line-text">
-          <h3>Soft Launch</h3>
-          <p>Limited release to partner studios and gathering customer feedback.</p>
-        </div>
-        <div class="circle">4</div>
-      </div>
-    </div>
-  </section>
-  <section class="section invest">
-    <img src="inkfade-bottle.png" alt="InkFade Bottle">
-    <div>
-      <h2>Invest in <span>InkFade</span></h2>
-      <p>We’re redefining an industry with a product no one's dared to create — and it's just the beginning. We’re open to both early strategic investors and visionary VCs.</p>
-      <a class="button" href="#" onclick="openModal()">Request Our Investor Deck</a>
-    </div>
-  </section>
-  <div class="modal" id="investorModal">
-    <div class="modal-content">
-      <h2>Request Investor Deck</h2>
-      <p>Fill in your details and we'll send you exclusive access.</p>
-      <input type="text" placeholder="Full Name" />
-      <input type="email" placeholder="Email Address" />
-      <input type="tel" placeholder="Phone Number" />
-      <div class="btn-group">
-        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn-submit">Submit Request</button>
-      </div>
-    </div>
-  </div>
-  <footer>
-    <p><strong>InkFade</strong> — The Future of Tattoos</p>
-    <p>© 2025 InkFade. All rights reserved.</p>
-  </footer>
-  <script>
-    const modal = document.getElementById('investorModal');
-    function openModal() {
-      document.body.classList.add('modal-open');
-      modal.style.display = 'block';
-    }
-    function closeModal() {
-      document.body.classList.remove('modal-open');
-      modal.style.display = 'none';
-    }
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InkFade | The Future of Tattoos</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* Color Variables */
     :root {
-      --bg: #fff;
-      --text: #000;
+      --bg: #ffffff;
+      --text: #000000;
       --accent: #d4af37;
       --card-bg: rgba(0, 0, 0, 0.05);
-      --modal-bg: #fff;
-      --cancel-bg: #000;
-      --cancel-text: #fff;
+      --modal-bg: #ffffff;
+      --cancel-bg: #000000;
+      --cancel-text: #ffffff;
     }
 
+    /* Dark Mode Variables */
     body.dark-mode {
       --bg: linear-gradient(180deg, #1a000d 0%, #0d0d0d 100%);
       --text: #f4f4f4;
       --card-bg: rgba(255, 255, 255, 0.05);
       --modal-bg: #1a1a1a;
-      --cancel-bg: #000;
-      --cancel-text: #fff;
+      --cancel-bg: #000000;
+      --cancel-text: #ffffff;
     }
 
+    /* Global Resets */
     html, body {
       margin: 0;
       padding: 0;
@@ -366,10 +39,25 @@
       overflow-x: hidden;
       transition: background 0.3s ease, color 0.3s ease;
     }
+    body.modal-open {
+      overflow: hidden;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
     h1, h2, h3, .disruptive {
       font-family: 'Anton', sans-serif;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+      margin: 0 0 20px;
     }
+    p {
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -380,11 +68,20 @@
       top: 0;
       z-index: 1000;
     }
+    .logo h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.8rem;
+    }
     nav a {
       margin: 0 15px;
       text-decoration: none;
       color: var(--text);
       font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent);
     }
     .toggle-btn {
       background: none;
@@ -396,31 +93,83 @@
       justify-content: center;
     }
     .toggle-icon {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       transition: transform 0.3s ease;
     }
+
+    /* Hero Section */
     .hero {
       text-align: center;
       padding: 100px 20px;
     }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
     .hero h1 span {
       color: var(--accent);
     }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    #about img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+    .about-content {
+      max-width: 600px;
+    }
+    #about h2 {
+      color: var(--accent);
+      font-size: 2.2rem;
+    }
+
+    /* Why It Matters Section */
+    #why {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+    #why h2 {
+      color: var(--accent);
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    /* Timeline (Roadmap) */
+    #roadmap .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--accent);
     }
     .timeline {
       position: relative;
       margin: 40px 0;
       padding-left: 30px;
-      border-left: 2px solid var(--accent);
+      border-left: 3px solid var(--accent);
     }
     .timeline-entry {
-      margin-bottom: 40px;
       position: relative;
+      margin-bottom: 40px;
+      padding-left: 20px;
     }
     .timeline-entry::before {
       content: attr(data-step);
@@ -437,41 +186,85 @@
       font-weight: bold;
     }
     .timeline-entry .content {
-      background-color: var(--card-bg);
+      background-color: var(--bg);
       border-left: 4px solid var(--accent);
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.dark-mode .timeline-entry .content {
+      background-color: var(--card-bg);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Invest Section */
+    #invest {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin-top: 40px;
+      background-color: var(--card-bg);
+      padding: 40px 20px;
+      border-radius: 10px;
     }
     .investor-cta img {
       max-width: 150px;
-      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .investor-cta h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .investor-cta p {
+      font-size: 1rem;
+      margin-bottom: 20px;
     }
     .investor-cta button {
       background-color: var(--accent);
       color: #000;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 24px;
+      font-size: 1rem;
       cursor: pointer;
       border-radius: 5px;
+      transition: background 0.3s;
     }
+    .investor-cta button:hover {
+      background-color: #b38e28;
+    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
+      z-index: 2000;
     }
     .modal-content {
       background-color: var(--modal-bg);
       padding: 30px;
       border-radius: 10px;
       max-width: 400px;
-      width: 100%;
-      box-shadow: 0 0 20px var(--accent);
+      width: 90%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--accent);
+      text-align: center;
+    }
+    .modal-content p {
+      text-align: center;
     }
     .modal-content input,
     .modal-content textarea {
@@ -480,6 +273,7 @@
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      font-family: 'Inter', sans-serif;
     }
     .modal-content button {
       margin-top: 10px;
@@ -489,15 +283,51 @@
       padding: 10px 20px;
       cursor: pointer;
       border-radius: 5px;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .modal-content button:hover {
+      background-color: #b38e28;
     }
     .modal-content .cancel {
       background-color: var(--cancel-bg);
       color: var(--cancel-text);
       margin-left: 10px;
     }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+
+    /* Responsive Tweaks */
+    @media (max-width: 768px) {
+      #about {
+        flex-direction: column;
+        text-align: center;
+      }
+      .investor-cta {
+        text-align: center;
+      }
+      .timeline {
+        padding-left: 20px;
+      }
+      .timeline-entry::before {
+        left: -35px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Header with Navigation & Dark Mode Toggle -->
   <header>
     <div class="logo"><h2>InkFade</h2></div>
     <nav>
@@ -507,13 +337,103 @@
       <a href="#invest">Invest</a>
     </nav>
     <button class="toggle-btn" onclick="toggleDarkMode()">
+      <!-- Replace these src attributes with your actual icon paths -->
       <img id="theme-icon" class="toggle-icon" src="light-icon.png" alt="Toggle Theme" />
     </button>
   </header>
 
-  <!-- rest of the content stays unchanged -->
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1>Tattoos are permanent... <span>Not Anymore</span></h1>
+    <p>InkFade is redefining self-expression with technology-driven ink innovation that fades on your terms. Join us as we revolutionize the tattoo industry and give everyone the freedom to evolve.</p>
+  </section>
 
+  <!-- About Section -->
+  <section id="about">
+    <img src="https://via.placeholder.com/300x400" alt="Founder photo" />
+    <div class="about-content">
+      <h2>Meet the Founder</h2>
+      <p>Hi, I’m Tyla — a creator, builder, and visionary who’s always questioned the idea of permanence. InkFade was born out of a moment of transition and identity transformation. After going through personal reinvention, I realized how many people crave the freedom to express without permanence holding them back. So, I began building a new category: semi-permanent tattoos that fade only when you choose. Together, we’re redefining what it means to wear your story on your skin.</p>
+    </div>
+  </section>
+
+  <!-- Why It Matters Section -->
+  <section id="why">
+    <h2>Why It Matters</h2>
+    <p>The tattoo industry has evolved for decades, yet permanence has always been its defining rule. What if self-expression didn’t have to last forever? Whether you outgrow your design, want to update your canvas, or simply crave flexibility, InkFade empowers you to write, rewrite, and reshape your story—on your timeline. Our proprietary ink formula bridges the gap between traditional permanence and fleeting trends, ensuring you never feel locked into a decision. This is the future of tattoos, where freedom and creativity coexist.</p>
+  </section>
+
+  <!-- Roadmap / Timeline Section -->
+  <section id="roadmap" class="timeline-section">
+    <h2 class="section-title">Our Development Roadmap</h2>
+    <div class="timeline">
+      <div class="timeline-entry" data-step="1">
+        <div class="content">
+          <h3>Concept &amp; Research</h3>
+          <p>February 2024 – We validated the market opportunity and fine-tuned our initial product concept through extensive consumer and industry research.</p>
+        </div>
+      </div>
+      <div class="timeline-entry" data-step="2">
+        <div class="content">
+          <h3>Formula Development</h3>
+          <p>June 2024 – Collaborating with top chemists and lab partners to create our proprietary fade-on-demand ink formula.</p>
+        </div>
+      </div>
+      <div class="timeline-entry" data-step="3">
+        <div class="content">
+          <h3>Testing &amp; Pilot Trials</h3>
+          <p>October 2024 – Completed safety testing and ran small-scale trials with select tattoo artists and industry professionals.</p>
+        </div>
+      </div>
+      <div class="timeline-entry" data-step="4">
+        <div class="content">
+          <h3>Soft Launch</h3>
+          <p>January 2025 – Limited release to partner studios, collecting feedback from early adopters and iterating on the formula and application process.</p>
+        </div>
+      </div>
+      <div class="timeline-entry" data-step="5">
+        <div class="content">
+          <h3>Market Expansion</h3>
+          <p>Q3 2025 – Scaling production, onboarding additional studio partners, and preparing for a broader public release in Q4.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Invest Section -->
+  <section id="invest">
+    <div class="investor-cta">
+      <img src="inkfade-bottle.png" alt="InkFade Bottle">
+      <h2>Invest in <span>InkFade</span></h2>
+      <p>We’re redefining an industry with a product no one’s dared to create—and it’s only the beginning. We’re open to both early strategic investors and visionary VCs. Be part of the next revolution in self-expression.</p>
+      <button onclick="openModal()">Request Our Investor Deck</button>
+    </div>
+  </section>
+
+  <!-- Investor Modal -->
+  <div class="modal" id="investorModal">
+    <div class="modal-content">
+      <h2>Request Investor Deck</h2>
+      <p>Fill in your details and we'll send you exclusive access.</p>
+      <input type="text" id="fullName" placeholder="Full Name" />
+      <input type="email" id="emailAddress" placeholder="Email Address" />
+      <input type="tel" id="phoneNumber" placeholder="Phone Number" />
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="cancel" onclick="closeModal()">Cancel</button>
+        <button onclick="submitRequest()">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>InkFade</strong> — The Future of Tattoos</p>
+    <p>© 2025 InkFade. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
   <script>
+    // Modal Functions
     function openModal() {
       document.getElementById('investorModal').style.display = 'flex';
       document.body.classList.add('modal-open');
@@ -523,15 +443,37 @@
       document.body.classList.remove('modal-open');
     }
     function submitRequest() {
-      alert("Thank you for your request! You'll receive the deck shortly.");
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('emailAddress').value.trim();
+      const phone = document.getElementById('phoneNumber').value.trim();
+      if (!name || !email) {
+        alert('Please provide at least your name and email.');
+        return;
+      }
+      // You can replace this alert with an actual form submission or API call
+      alert(`Thank you, ${name}! You’ll receive the deck shortly at ${email}.`);
       closeModal();
     }
+
+    // Dark Mode Toggle
     function toggleDarkMode() {
       const body = document.body;
       const icon = document.getElementById('theme-icon');
       body.classList.toggle('dark-mode');
-      icon.src = body.classList.contains('dark-mode') ? 'dark-icon.png' : 'light-icon.png';
+      if (body.classList.contains('dark-mode')) {
+        icon.src = 'dark-icon.png'; // Replace with your dark-mode icon path
+      } else {
+        icon.src = 'light-icon.png'; // Replace with your light-mode icon path
+      }
     }
+
+    // Close modal when clicking outside content
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('investorModal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
   </script>
 </body>
 </html>
