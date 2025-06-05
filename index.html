@@ -110,6 +110,27 @@
       width: 100%;
     }
 
+    /* Toggle Button Container */
+    .toggle-btn {
+      width: 40px;
+      height: 40px;
+      background-color: var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .toggle-btn:hover {
+      transform: scale(1.05);
+    }
+    .toggle-icon {
+      width: 20px;
+      height: 20px;
+    }
+
     /* Hamburger icon for mobile */
     .hamburger {
       display: none;
@@ -544,7 +565,13 @@
       <a href="#roadmap">Roadmap</a>
       <a href="#invest">Invest</a>
     </nav>
-    <!-- Hamburger Icon for Mobile -->
+
+    <!-- Dark/Light Mode Toggle (in white circle) -->
+    <div class="toggle-btn" onclick="toggleDarkMode()">
+      <img id="theme-icon" class="toggle-icon" src="light-icon.png" alt="Toggle Theme" />
+    </div>
+
+    <!-- Hamburger Icon for Mobile (if needed) -->
     <div class="hamburger" onclick="toggleMobileMenu()">
       <span></span>
       <span></span>
@@ -706,10 +733,16 @@
       }
     });
 
-    // Dark Mode Toggle (optional)
+    // Dark Mode Toggle
     function toggleDarkMode() {
       const body = document.body;
+      const icon = document.getElementById('theme-icon');
       body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        icon.src = 'dark-icon.png';
+      } else {
+        icon.src = 'light-icon.png';
+      }
     }
   </script>
 </body>
