@@ -91,6 +91,7 @@
       padding: 40px 0;
       display: flex;
       align-items: center;
+      justify-content: center;
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.6s ease-out;
@@ -110,18 +111,19 @@
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      position: relative;
-      z-index: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
     }
     .line-text {
-      width: 50%;
-      padding: 0 30px;
-    }
-    .left .line-text {
-      text-align: right;
-    }
-    .right .line-text {
-      text-align: left;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 20px;
+      width: 40%;
+      z-index: 1;
     }
     .left {
       justify-content: flex-end;
@@ -130,19 +132,28 @@
       flex-direction: row-reverse;
       justify-content: flex-end;
     }
+    .left .line-text {
+      text-align: right;
+      margin-right: 60px;
+    }
+    .right .line-text {
+      text-align: left;
+      margin-left: 60px;
+    }
     .timeline-step::after {
       content: '';
       position: absolute;
       top: 50%;
-      width: 40%;
+      width: 40px;
       height: 2px;
       background-color: #ccc;
+      z-index: 0;
     }
     .left::after {
-      right: 50%;
+      right: calc(50% + 25px);
     }
     .right::after {
-      left: 50%;
+      left: calc(50% + 25px);
     }
     .invest {
       display: flex;
@@ -190,14 +201,6 @@
       color: #111;
       text-align: center;
       box-shadow: 0 15px 48px rgba(0, 0, 0, 0.2);
-    }
-    .modal-content h2 {
-      margin-top: 0;
-      font-size: 20px;
-    }
-    .modal-content p {
-      font-size: 14px;
-      margin-bottom: 20px;
     }
     .modal-content input {
       width: 100%;
@@ -261,10 +264,12 @@
       <a class="button" href="#" onclick="openModal()">Investor Info</a>
     </nav>
   </header>
+
   <section class="hero">
     <h1 class="show">Tattoos are permanent... <span>Not Anymore</span></h1>
     <p>InkFade is revolutionizing self-expression with category-defining innovation — tattoos that fade, creativity that lasts.</p>
   </section>
+
   <section class="section">
     <h2>Our Development Timeline</h2>
     <div class="timeline">
@@ -298,6 +303,7 @@
       </div>
     </div>
   </section>
+
   <section class="section">
     <div class="invest">
       <img src="inkfade-bottle.png" alt="InkFade Bottle">
@@ -308,6 +314,7 @@
       </div>
     </div>
   </section>
+
   <div class="modal" id="investorModal">
     <div class="modal-content">
       <h2>Request Investor Deck</h2>
@@ -321,11 +328,13 @@
       </div>
     </div>
   </div>
+
   <footer>
     <p><strong>InkFade</strong> — The Future of Tattoos</p>
     <p><a href="#">About</a><a href="#">Why It Matters</a><a href="#">Roadmap</a><a href="#">Investor Info</a></p>
     <p>© 2025 InkFade. All rights reserved.</p>
   </footer>
+
   <script>
     const modal = document.getElementById('investorModal');
     function openModal() {
@@ -344,7 +353,6 @@
           }
         });
       }, { threshold: 0.1 });
-
       document.querySelectorAll('.timeline-step, .hero h1').forEach(el => {
         observer.observe(el);
       });
